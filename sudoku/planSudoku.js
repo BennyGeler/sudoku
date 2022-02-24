@@ -4,6 +4,8 @@ const size = 9
 const indexesArr = createAllIndexesCubes(size)
 const blockMat = createBlockMat(size)
 const dollarsMatrix = createDollarsMatrix(size)
+// const { snaleMove } = require('./shit/shit')
+// const ind = snaleMove()
 
 function createDollarsMatrix(length = 9) {
     const arr = new Array(length)
@@ -125,6 +127,15 @@ function fillNum({ rowIndex, colIndex }) {
 }
 
 function run() {
+    // for (let i = 0; i < ind.length; i++) {
+    //     const num = fillNum({ rowIndex: ind[i].row, colIndex:ind[i].col })
+    //         if (num === '!')
+    //             return 'fail'
+    //         if (num !== '@')
+    //             array[ind[i].row][ind[i].col] = num
+    // }
+
+
     for (let rowIndex = 0; rowIndex < array.length; rowIndex++) {
         for (let colIndex = 0; colIndex < array.length; colIndex++) {
             const num = fillNum({ rowIndex, colIndex })
