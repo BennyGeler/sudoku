@@ -1,6 +1,6 @@
 const fs = require("fs");
 let array, hasReachedSudoku = false, startAgainCounter = 0, randomNumCounter = 0
-const size = 9
+const size = 16
 const indexesArr = createAllIndexesCubes(size)
 const blockMat = createBlockMat(size)
 const dollarsMatrix = createDollarsMatrix(size)
@@ -127,25 +127,28 @@ function fillNum({ rowIndex, colIndex }) {
 }
 
 function run() {
-    // for (let i = 0; i < ind.length; i++) {
-    //     const num = fillNum({ rowIndex: ind[i].row, colIndex:ind[i].col })
-    //         if (num === '!')
-    //             return 'fail'
-    //         if (num !== '@')
-    //             array[ind[i].row][ind[i].col] = num
-    // }
-
-
+    let failsCount = 0;
     for (let rowIndex = 0; rowIndex < array.length; rowIndex++) {
         for (let colIndex = 0; colIndex < array.length; colIndex++) {
             const num = fillNum({ rowIndex, colIndex })
-            if (num === '!')
+            if (num === '!') {
+                failsCount++;
+                resetLine(rowIndex)
+                colIndex = -1
+            }
+            if (failsCount > 50)
                 return 'fail'
-            if (num !== '@')
+            if (num !== '@' && num !== '!')
                 array[rowIndex][colIndex] = num
         }
     }
     hasReachedSudoku = true
+}
+
+function resetLine(rowIndex) {
+    for (let i = 0; i < array.length; i++) {
+        array[rowIndex][i] = '$';
+    }
 }
 
 function print(text) {
