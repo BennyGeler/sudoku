@@ -1,11 +1,9 @@
 const fs = require("fs");
 let array, hasReachedSudoku = false, startAgainCounter = 0, randomNumCounter = 0
-const size = 16
+const size = 25
 const indexesArr = createAllIndexesCubes(size)
 const blockMat = createBlockMat(size)
 const dollarsMatrix = createDollarsMatrix(size)
-// const { snaleMove } = require('./shit/shit')
-// const ind = snaleMove()
 
 function createDollarsMatrix(length = 9) {
     const arr = new Array(length)
@@ -116,7 +114,7 @@ function fillNum({ rowIndex, colIndex }) {
     while (!hasReachedSudoku && !canPopulateNum({ rowIndex, colIndex, numToInsert })) {
         failureCount++;
         numToInsert = randomNum()
-        if (failureCount > 160 && !hasReachedSudoku) {
+        if (failureCount > 100 && !hasReachedSudoku) {
             return '!'
         }
     }
@@ -136,7 +134,7 @@ function run() {
                 resetLine(rowIndex)
                 colIndex = -1
             }
-            if (failsCount > 50)
+            if (failsCount > 1000)
                 return 'fail'
             if (num !== '@' && num !== '!')
                 array[rowIndex][colIndex] = num
@@ -168,11 +166,13 @@ function startAgain() {
 }
 
 function returnSudoku() {
+    const begin = new Date()
     let res = startAgain()
     while (res === 'fail')
         res = startAgain()
     console.log('randomNumCounter:', randomNumCounter)
     console.log('startAgainCounter:', startAgainCounter)
+    console.log((new Date() - begin)/1000,'sec')
     print(array)
     return array
 }
