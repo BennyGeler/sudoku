@@ -1,4 +1,4 @@
-const { returnSudoku, makeCopyOfSomething } = require('./planSudoku')
+const { returnSudoku, makeCopyOfSomething } = require('./initialPlanSudoku')
 
 function randomNum() {
     return Math.floor(Math.random() * sudoku.length)

@@ -1,6 +1,6 @@
 const reader = require("readline-sync")
-const { sudoku, readyToPlaySudoku } = require('./sudokuReadyToPlay')
-const { makeCopyOfSomething, getIndexesOfBlock, blockMat } = require('./planSudoku')
+const { sudoku, readyToPlaySudoku } = require('./makeSudokuReadyToPlay')
+const { makeCopyOfSomething, getIndexesOfBlock, blockMat } = require('./initialPlanSudoku')
 let copyOfSudoku = makeCopyOfSomething(readyToPlaySudoku)
 let lastMove = [],
     isWin = false, isFirstTime = true, isSpecialUser = false, end = false
