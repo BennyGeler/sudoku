@@ -150,7 +150,7 @@ function resetLine(rowIndex) {
 }
 
 function print(text) {
-    fs.writeFile('./sudukoSolution/sudoku.txt', JSON.stringify(text), (err) => {
+    fs.writeFile('c:/Users/Benny/Desktop/sudoku.txt', JSON.stringify(text), (err) => {
         if (err) return console.error(err)
     })
 }
@@ -172,7 +172,7 @@ function returnSudoku() {
         res = startAgain()
     console.log('randomNumCounter:', randomNumCounter)
     console.log('startAgainCounter:', startAgainCounter)
-    console.log((new Date() - begin)/1000,'sec')
+    console.log((new Date() - begin) / 1000, 'sec')
     print(array)
     return array
 }
