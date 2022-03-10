@@ -134,7 +134,7 @@ function run() {
                 resetLine(rowIndex)
                 colIndex = -1
             }
-            if (failsCount > 1000)
+            if (failsCount > 2000)
                 return 'fail'
             if (num !== '@' && num !== '!')
                 array[rowIndex][colIndex] = num
