@@ -1,9 +1,6 @@
 const fs = require("fs");
 let array, hasReachedSudoku = false, startAgainCounter = 0, randomNumCounter = 0
-const size = 25
-const indexesArr = createAllIndexesCubes(size)
-const blockMat = createBlockMat(size)
-const dollarsMatrix = createDollarsMatrix(size)
+let indexesArr, blockMat, dollarsMatrix
 
 function createDollarsMatrix(length = 9) {
     const arr = new Array(length)
@@ -165,7 +162,10 @@ function startAgain() {
     return run()
 }
 
-function returnSudoku() {
+function returnSudoku(size) {
+    indexesArr = createAllIndexesCubes(size)
+    blockMat = createBlockMat(size)
+    dollarsMatrix = createDollarsMatrix(size)
     const begin = new Date()
     let res = startAgain()
     while (res === 'fail')

@@ -1,11 +1,27 @@
 const reader = require("readline-sync")
-const { sudoku, readyToPlaySudoku } = require('./makeSudokuReadyToPlay')
-const { makeCopyOfSomething, getIndexesOfBlock, blockMat } = require('./initialPlanSudoku')
-let copyOfSudoku = makeCopyOfSomething(readyToPlaySudoku)
+const { makeCopyOfSomething, getIndexesOfBlock, returnSudoku, blockMat } = require('./initialPlanSudoku')
 let lastMove = [],
     isWin = false, isFirstTime = true, isSpecialUser = false, end = false
-let input
+let input, sudoku, readyToPlaySudoku, copyOfSudoku
 const isANumber = v => isNaN(v) === false && v != ' ';
+
+function randomNum() {
+    return Math.floor(Math.random() * sudoku.length)
+}
+
+function makeGameReday(sudoku) {
+    const copyOfSudoku = makeCopyOfSomething(sudoku)
+    for (let i = 0; i < 40; i++)
+        replaceNumWithSpace(copyOfSudoku)
+    return copyOfSudoku
+}
+
+function replaceNumWithSpace(sudoku) {
+    let x = randomNum(), y = randomNum()
+    while (sudoku[x][y] === ' ')
+        x = randomNum(), y = randomNum()
+    sudoku[x][y] = ' '
+}
 
 function print(what) {
     what = what === 'curr' ? copyOfSudoku : sudoku
@@ -19,6 +35,9 @@ function print(what) {
 }
 
 function play() {
+    sudoku = returnSudoku(parseInt(reader.question("Insert size (for example '9' for a 9*9 table) --->", { hideEchoBack: false })))
+    readyToPlaySudoku = makeGameReday(sudoku)
+    copyOfSudoku = makeCopyOfSomething(readyToPlaySudoku)
     print('curr')
     input = getInputFromUser()
     while (!end && !isWin) {
